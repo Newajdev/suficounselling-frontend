@@ -1,9 +1,10 @@
 import React from 'react'
+import logo from '../public/Logo.png'
 
 function Runnner() {
     return (
-        <div className="max-w-[1240px] mx-auto gap-6 h-screen flex justify-center items-center">
-            <img src="./public/Logo.png" alt="" />
+        <div className="max-w-[1240px] mx-auto gap-10 h-screen flex justify-center items-center">
+            <img src={logo} alt="" />
             <div>
                 <h1 className="text-8xl font-black text-[#224047]">DIRI Sufi Counselling Center</h1>
                 <p className="text-red-600 font-bold text-2xl mt-8">This website is under Construction <br />Please Stay with us we
@@ -12,6 +13,7 @@ function Runnner() {
                     <p>For any info:</p>
                     <p>01711-817274, 01841-444433</p>
                 </div>
+                <p>ঠিকানা: মাইজভাণ্ডার দরবার শরীফ, ফটিকছড়ি, চট্টগ্রাম</p>
             </div>
         </div>
     )
