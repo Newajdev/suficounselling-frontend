@@ -3,16 +3,23 @@ import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
 
+const BaseURL = "https://bdapis.vercel.app"
+
+/**
+ * 
+ * /geo/v2.0/upazilas/
+ * /geo/v2.0/unions
+ * 
+ */
 
 const DataFrom = () => {
   const [districts, setDistricts] = useState([])
+  const [upazilas, setUpazilas] = useState([])
+  const [unions, setUnions] = useState([])
   const [addinput, setAddInput] = useState(false)
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm()
+  const { register,  handleSubmit,  watch,  formState: { errors },} = useForm();
+
+  const Districts = districts.map((dis)=> console.log(dis))
 
   const onSubmit = (data) => console.log(data)
   // =================================================
@@ -21,6 +28,7 @@ const DataFrom = () => {
   const AgeValue = watch("Age")
   const otherValue = watch("other")
   const otherinfoValue = watch("otherinfo")
+  const VillageValue = watch("Village")
 
 
   // =================================================
@@ -33,9 +41,14 @@ const DataFrom = () => {
   }, [otherValue])
 
   useEffect(() => {
-    axios("http://bdapis.com/api/v1.2/districts")
+    axios(`${BaseURL}/geo/v2.0/districts`)
       .then((res) => setDistricts(res?.data?.data))
   }, [])
+
+  // useEffect(() => {
+  //   axios(`${BaseURL}/`)
+  //     .then((res) => setUpazilas(res?.data?.data))
+  // }, [])
 
   // console.log(districts);
 
@@ -95,11 +108,12 @@ const DataFrom = () => {
             <span className="text-red-500 text-sm">Foriyadi Father's Name is Required</span>
           }
         </div>
-
-        <div className="flex items-center gap-4">
+        
+        {/* age, gender, other */}
+        <div className="w-full flex items-center gap-4">
 
           {/* Age */}
-          <div className="relative mb-3">
+          <div className="relative mb-3 w-full">
             <label
               htmlFor="Age"
               className={`
@@ -123,9 +137,9 @@ const DataFrom = () => {
             }
           </div>
           {/* Gender */}
-          <div className="relative mb-3">
+          <div className="relative mb-3 w-full">
 
-            <div className="w-full border border-gray-300 rounded-lg py-2 px-5 my-1 text-darkGreen focus:outline-darkGreen">
+            <div className="w-full border border-gray-300 rounded-lg py-1 px-5 my-1 text-darkGreen focus:outline-darkGreen">
               <select className="w-full rounded-lg  my-1 text-darkGreen focus:outline-none">
                 <option disabled selected>Gender</option>
                 <option>Male</option>
@@ -136,9 +150,9 @@ const DataFrom = () => {
 
           </div>
           {/* Gender2 */}
-          <div className="relative mb-3">
+          <div className="relative mb-3 w-full">
 
-            <div className="w-full border border-gray-300 rounded-lg py-2 px-5 my-1 text-darkGreen focus:outline-darkGreen">
+            <div className="w-full border border-gray-300 rounded-lg py-1 px-5 my-1 text-darkGreen focus:outline-darkGreen">
               <select className="w-full rounded-lg  my-1 text-darkGreen focus:outline-none" {...register("other", { required: true })}>
                 <option disabled selected>other</option>
                 <option>Male</option>
@@ -149,7 +163,7 @@ const DataFrom = () => {
 
           </div>
           {
-            addinput && <div className="relative mb-3">
+            addinput && <div className="relative mb-3 w-full">
             <label
               htmlFor="otherinfo"
               className={`
@@ -162,7 +176,89 @@ const DataFrom = () => {
               Other Info
             </label>
             <input
-              className="border border-gray-300 rounded-lg py-2 px-5 my-1 text-darkGreen focus:outline-darkGreen"
+              className="w-full border border-gray-300 rounded-lg py-2 px-5 my-1 text-darkGreen focus:outline-darkGreen"
+              type="text"
+              id="other-info"
+              placeholder="Other Info"
+              {...register("otherinfo", { required: true })}
+            />
+            {errors.otherinfo &&
+              <span className="text-red-500 text-sm">Foriyadi Father's Name is Required</span>
+            }
+          </div>
+          }
+
+
+        </div>
+
+        {/* Address */}
+        <div className="w-full flex items-center gap-4">
+
+          {/* Village */}
+          <div className="relative mb-3 w-full">
+            <label
+              htmlFor="Village"
+              className={`
+            absolute left-5 text-gray-500 transition-all duration-200
+            ${VillageValue
+                  ? "-top-2 text-sm bg-white px-1 "
+                  : "top-2 opacity-0 pointer-events-none"}
+          `}
+            >
+              Your Village
+            </label>
+            <input
+              className="w-full border border-gray-300 rounded-lg py-2 px-5 my-1 text-darkGreen focus:outline-darkGreen"
+              type="text"
+              id="Village"
+              placeholder="Your Age"
+              {...register("Village", { required: true })}
+            />
+            {errors.Village &&
+              <span className="text-red-500 text-sm">Foriyadi Father's Name is Required</span>
+            }
+          </div>
+          {/* Gender */}
+          <div className="relative mb-3 w-full">
+
+            <div className="w-full border border-gray-300 rounded-lg py-1 px-5 my-1 text-darkGreen focus:outline-darkGreen">
+              <select className="w-full rounded-lg  my-1 text-darkGreen focus:outline-none">
+                <option disabled selected>Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+          </div>
+          {/* Gender2 */}
+          <div className="relative mb-3 w-full">
+
+            <div className="w-full border border-gray-300 rounded-lg py-1 px-5 my-1 text-darkGreen focus:outline-darkGreen">
+              <select className="w-full rounded-lg  my-1 text-darkGreen focus:outline-none" {...register("other", { required: true })}>
+                <option disabled selected>other</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+          </div>
+          {
+            addinput && <div className="relative mb-3 w-full">
+            <label
+              htmlFor="otherinfo"
+              className={`
+            absolute left-5 text-gray-500 transition-all duration-200
+            ${otherinfoValue
+                  ? "-top-2 text-sm bg-white px-1 "
+                  : "top-2 opacity-0 pointer-events-none"}
+          `}
+            >
+              Other Info
+            </label>
+            <input
+              className="w-full border border-gray-300 rounded-lg py-2 px-5 my-1 text-darkGreen focus:outline-darkGreen"
               type="text"
               id="other-info"
               placeholder="Other Info"
