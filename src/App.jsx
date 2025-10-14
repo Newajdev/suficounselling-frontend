@@ -1,4 +1,5 @@
 import './App.css'
+import DataFrom from './components/DataFrom'
 import Runnner from './Runnner'
 
 function App() {
@@ -6,7 +7,8 @@ function App() {
 
   return (
     <>
-      <Runnner/>
+      {/* <Runnner/> */}
+      <DataFrom/>
     </>
   )
 }
