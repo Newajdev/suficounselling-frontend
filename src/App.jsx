@@ -7,8 +7,8 @@ function App() {
 
   return (
     <>
-      {/* <Runnner/> */}
-      <DataFrom/>
+      <Runnner/>
+      {/* <DataFrom/> */}
     </>
   )
 }
