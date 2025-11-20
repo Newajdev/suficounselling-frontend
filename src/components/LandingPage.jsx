@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import { EffectFlip, Pagination, Navigation, Autoplay } from "swiper/modules";
+import { EffectFlip,Autoplay } from "swiper/modules";
 const StaticLanding = () => {
   const navLink = [
     {
@@ -39,7 +39,7 @@ const StaticLanding = () => {
         <div className="py-3 flex items-center justify-between">
           <img
             className="w-24"
-            src="/public/Logo.png"
+            src="/Logo.png"
             alt="DIRI Sufi Counsilling Center Logo"
           />
           <div>
