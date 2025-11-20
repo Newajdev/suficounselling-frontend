@@ -1,5 +1,4 @@
 import './App.css'
-import DataFrom from './components/DataFrom'
 import StaticLanding from './components/LandingPage'
 import Runnner from './components/Runnner'
 
