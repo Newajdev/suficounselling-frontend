@@ -9,19 +9,22 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import { EffectFlip,Autoplay } from "swiper/modules";
+import { EffectFlip, Autoplay } from "swiper/modules";
+
+
 const StaticLanding = () => {
+
   const navLink = [
     {
-      pathname: "homeRef",
+      pathname: "/",
       title: "Home",
     },
     {
-      pathname: "aboutRef",
+      pathname: "/about",
       title: "About",
     },
     {
-      pathname: "galleryRef",
+      pathname: "/gallery",
       title: "Gallery",
     },
   ];
@@ -45,7 +48,7 @@ const StaticLanding = () => {
           <div>
             <ul className="flex gap-x-12 text-xl text-[#1F3B45]">
               {navLink.map((link, idx) => (
-                <li key={idx}>{link.title}</li>
+                <li key={idx} className={`${link.pathname === ""}`}>{link.title}</li>
               ))}
             </ul>
           </div>
